@@ -33,6 +33,29 @@ public class ListPresidentAdapter extends RecyclerView.Adapter<ListPresidentAdap
         this.listPresident = listPresident;
     }
 
+    @Override
+    public CategoryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemRow = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_row_president, parent, false);
+        return new CategoryViewHolder(itemRow);
+    }
+
+    @Override
+    public void onBindViewHolder(CategoryViewHolder holder, int position) {
+        holder.tvName.setText(getListPresident().get(position).getName());
+        holder.tvRemarks.setText(getListPresident().get(position).getRemarks());
+
+        Glide.with(context)
+                .load(getListPresident().get(position).getPhoto())
+                .override(55, 55)
+                .crossFade()
+                .into(holder.imgPhoto);
+    }
+
+    @Override
+    public int getItemCount() {
+        return getListPresident().size();
+    }
+
     public class CategoryViewHolder extends RecyclerView.ViewHolder {
         TextView tvName;
         TextView tvRemarks;
