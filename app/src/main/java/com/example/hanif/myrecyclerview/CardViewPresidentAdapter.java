@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -17,9 +18,9 @@ import java.util.ArrayList;
  * Created by HANIF on 15/02/2018.
  */
 
-public class CardViewPresidentAdapter extends RecyclerView.Adapter<CardViewPresidentAdapter.CardViewViewHolder> {
-    private Context context;
+public class CardViewPresidentAdapter extends RecyclerView.Adapter<CardViewPresidentAdapter.CardViewViewHolder>{
     private ArrayList<President> listPresident;
+    private Context context;
 
     public CardViewPresidentAdapter(Context context) {
         this.context = context;
@@ -32,7 +33,6 @@ public class CardViewPresidentAdapter extends RecyclerView.Adapter<CardViewPresi
     public void setListPresident(ArrayList<President> listPresident) {
         this.listPresident = listPresident;
     }
-
     @Override
     public CardViewViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cardview_president, parent, false);
@@ -42,6 +42,7 @@ public class CardViewPresidentAdapter extends RecyclerView.Adapter<CardViewPresi
 
     @Override
     public void onBindViewHolder(CardViewViewHolder holder, int position) {
+
         President p = getListPresident().get(position);
 
         Glide.with(context)
@@ -51,7 +52,22 @@ public class CardViewPresidentAdapter extends RecyclerView.Adapter<CardViewPresi
 
         holder.tvName.setText(p.getName());
         holder.tvRemarks.setText(p.getRemarks());
-        holder.btnFavorite.setOnClickListener();
+
+        holder.btnFavorite.setOnClickListener(new CustomOnItemClickListener(position, new CustomOnItemClickListener.OnItemClickCallback() {
+
+            @Override
+            public void onItemClicked(View view, int position) {
+                Toast.makeText(context, "Favorite "+getListPresident().get(position).getName(), Toast.LENGTH_SHORT).show();
+            }
+        }));
+
+        holder.btnShare.setOnClickListener(new CustomOnItemClickListener(position, new CustomOnItemClickListener.OnItemClickCallback() {
+
+            @Override
+            public void onItemClicked(View view, int position) {
+                Toast.makeText(context, "Share " + getListPresident().get(position).getName(), Toast.LENGTH_SHORT).show();
+            }
+        }));
     }
 
     @Override
@@ -59,7 +75,7 @@ public class CardViewPresidentAdapter extends RecyclerView.Adapter<CardViewPresi
         return getListPresident().size();
     }
 
-    public class CardViewViewHolder extends RecyclerView.ViewHolder {
+    public class CardViewViewHolder extends RecyclerView.ViewHolder{
         ImageView imgPhoto;
         TextView tvName, tvRemarks;
         Button btnFavorite, btnShare;
