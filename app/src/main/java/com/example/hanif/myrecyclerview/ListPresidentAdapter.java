@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 /**
@@ -17,17 +19,17 @@ import java.util.ArrayList;
 
 public class ListPresidentAdapter extends RecyclerView.Adapter<ListPresidentAdapter.CategoryViewHolder> {
     private Context context;
-    private ArrayList<ListPresidentAdapter> listPresident;
+    private ArrayList<President> listPresident;
 
     public ListPresidentAdapter(Context context) {
         this.context = context;
     }
 
-    public ArrayList<ListPresidentAdapter> getListPresident() {
+    public ArrayList<President> getListPresident() {
         return listPresident;
     }
 
-    public void setListPresident(ArrayList<ListPresidentAdapter> listPresident) {
+    public void setListPresident(ArrayList<President> listPresident) {
         this.listPresident = listPresident;
     }
 
@@ -43,6 +45,8 @@ public class ListPresidentAdapter extends RecyclerView.Adapter<ListPresidentAdap
             imgPhoto = (ImageView)itemView.findViewById(R.id.img_item_photo);
         }
     }
+
+
 
 
 }

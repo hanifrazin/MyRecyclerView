@@ -5,7 +5,7 @@ package com.example.hanif.myrecyclerview;
  */
 
 public class President {
-    private String name;
+    private String name, remarks, photo;
 
     public String getName() {
         return name;
@@ -30,7 +30,4 @@ public class President {
     public void setPhoto(String photo) {
         this.photo = photo;
     }
-
-    private String remarks;
-    private String photo;
 }
